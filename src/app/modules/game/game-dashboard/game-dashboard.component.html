@@ -1,0 +1,287 @@
+<div *ngIf="init">
+
+  <div class="player-info">
+    <mat-card>
+      <table>
+        <tr>
+          <td>Player Id:</td>
+          <td>{{userid}}</td>
+        </tr>
+        <tr>
+          <td>Player Name:</td>
+          <td>{{playerName}}</td>
+        </tr>
+        <tr>
+          <td>Log:</td>
+          <td>{{message}}</td>
+        </tr>
+      </table>
+    </mat-card>
+  </div>
+  <!-- -->
+  <div class="turn-info">
+    <br><br>
+    <mat-grid-list cols="6" rows="1" rowHeight="30px">
+      <mat-grid-tile>
+        {{gameData.p1.name}}: &nbsp;&nbsp;
+        <div *ngIf="playersTurn[0]==true">
+          <div style="font-size: 24px; color: lightgreen;">
+            <i class="far fa-check-circle"></i>
+          </div>
+        </div>
+        <div *ngIf="playersTurn[0]!=true">
+          <div style="font-size: 24px; color: lightpink;">
+            <i class="far fa-times-circle"></i>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        {{gameData.p2.name}} &nbsp;&nbsp;
+        <div *ngIf="playersTurn[1]==true">
+          <div style="font-size: 24px; color: lightgreen;">
+            <i class="far fa-check-circle"></i>
+          </div>
+        </div>
+        <div *ngIf="playersTurn[1]==false">
+          <div style="font-size: 24px; color: lightpink;">
+            <i class="far fa-times-circle"></i>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        {{gameData.p3.name}}: &nbsp;&nbsp;
+        <div *ngIf="playersTurn[2]==true">
+          <div style="font-size: 24px; color: lightgreen;">
+            <i class="far fa-check-circle"></i>
+          </div>
+        </div>
+        <div *ngIf="playersTurn[2]==false">
+          <div style="font-size: 24px; color: lightpink;">
+            <i class="far fa-times-circle"></i>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        {{gameData.p4.name}}: &nbsp;&nbsp;
+        <div *ngIf="playersTurn[3]==true">
+          <div style="font-size: 24px; color: lightgreen;">
+            <i class="far fa-check-circle"></i>
+          </div>
+        </div>
+        <div *ngIf="playersTurn[3]==false">
+          <div style="font-size: 24px; color: lightpink;">
+            <i class="far fa-times-circle"></i>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        {{gameData.p5.name}}: &nbsp;&nbsp;
+        <div *ngIf="playersTurn[4]==true">
+          <div style="font-size: 24px; color: lightgreen;">
+            <i class="far fa-check-circle"></i>
+          </div>
+        </div>
+        <div *ngIf="playersTurn[4]==false">
+          <div style="font-size: 24px; color: lightpink;">
+            <i class="far fa-times-circle"></i>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        {{gameData.p6.name}}: &nbsp;&nbsp;
+        <div *ngIf="playersTurn[5]==true">
+          <div style="font-size: 24px; color: lightgreen;">
+            <i class="far fa-check-circle"></i>
+          </div>
+        </div>
+        <div *ngIf="playersTurn[5]==false">
+          <div style="font-size: 24px; color: lightpink;">
+            <i class="far fa-times-circle"></i>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <!-- -->
+  <br><br>
+  <div class="avilable-cards">
+    <mat-card class="card-holder-matcard">
+      <mat-card-header>
+        <mat-card-title>Avilable Cards</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="cards" *ngFor="let item of playerCards">
+          <button mat-button (click)="button(item)">{{item}}</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!-- -->
+  <br><br>
+  <div class="deal-maker">
+    <div *ngIf="deal==false && playerTurn==true">
+      <button mat-raised-button (click)="makeDeal()">Make a Deal</button>
+    </div>
+    <div *ngIf="deal==true && playerTurn==true">
+      <mat-card class="deal-maker-matcard">
+        <mat-card-header>
+          <mat-card-title>Deal Maker</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="cards" *ngFor="let item of dealItems">
+            <button mat-button (click)="removingButton(item)">{{item}}</button>
+          </div>
+          <button id="close" mat-button (click)="closeDeal()">CANCEL</button>
+          <div *ngIf="dealItems.length==6">
+            <button mat-raised-button (click)="dealChecker()">DEAL</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <!-- -->
+  <br><br>
+  <div class="Suggestion-deck">
+
+    <mat-card class="ask-friend-deck-matcard">
+      <form [formGroup]="friendform">
+        <mat-card-header>
+          <mat-card-title>Ask Your Friend</mat-card-title>
+          <mat-card-subtitle>
+            <mat-radio-group formControlName="friend">
+              <div *ngIf="userid%2==0">
+                <div *ngIf="userid!=2 && gameData.p2.cards.length!=0">
+                  <mat-radio-button value="2">{{gameData.p2.name}}</mat-radio-button>
+                </div>
+                <div *ngIf="userid!=4 && gameData.p4.cards.length!=0">
+                  <mat-radio-button value="4">{{gameData.p4.name}}</mat-radio-button>
+                </div>
+                <div *ngIf="userid!=6 && gameData.p6.cards.length!=0">
+                  <mat-radio-button value="6">{{gameData.p6.name}}</mat-radio-button>
+                </div>
+              </div>
+              <div *ngIf="userid%2!=0">
+                <div *ngIf="userid!=1 && gameData.p1.cards.length!=0">
+                  <mat-radio-button value="1">{{gameData.p1.name}}</mat-radio-button>
+                </div>
+                <div *ngIf="userid!=3 && gameData.p3.cards.length!=0">
+                  <mat-radio-button value="3">{{gameData.p3.name}}</mat-radio-button>
+                </div>
+                <div *ngIf="userid!=5 && gameData.p5.cards.length!=0">
+                  <mat-radio-button value="5">{{gameData.p5.name}}</mat-radio-button>
+                </div>
+              </div>
+              <br><br>
+            </mat-radio-group>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group formControlName="card">
+            <div class="wrapper-cards">
+              <div class="sug-cards" *ngFor="let item of cards1">
+                <mat-radio-button value="{{item}}">{{item}}</mat-radio-button>
+              </div>
+            </div>
+            <div class="wrapper-cards">
+              <div class="sug-cards" *ngFor="let item of cards2">
+                <mat-radio-button value="{{item}}">{{item}}</mat-radio-button>
+              </div>
+            </div>
+            <div class="wrapper-cards">
+              <div class="sug-cards" *ngFor="let item of cards3">
+                <mat-radio-button value="{{item}}">{{item}}</mat-radio-button>
+              </div>
+            </div>
+            <div class="wrapper-cards">
+              <div class="sug-cards" *ngFor="let item of cards4">
+                <mat-radio-button value="{{item}}">{{item}}</mat-radio-button>
+              </div>
+            </div>
+          </mat-radio-group>
+          <br><br>
+          <button class="ask-button" mat-raised-button type="submit" (click)="askFriend()" [disabled]="!friendform.valid || playerTurn==false || deal==false">ASK</button>
+        </mat-card-content>
+      </form>
+    </mat-card>
+
+    <mat-card class="Suggestion-deck-matcard">
+      <form [formGroup]="form">
+        <mat-card-header>
+          <mat-card-title>Select an Opponent and a Card</mat-card-title>
+          <mat-card-subtitle>
+            <mat-radio-group formControlName="opponent">
+              <div *ngIf="userid%2!=0">
+                <div *ngIf="gameData.p2.cards.length!=0">
+                  <mat-radio-button value="2">{{gameData.p2.name}}</mat-radio-button>
+                </div>
+                <div *ngIf="gameData.p4.cards.length!=0">
+                  <mat-radio-button value="4">{{gameData.p4.name}}</mat-radio-button>
+                </div>
+                <div *ngIf="gameData.p6.cards.length!=0">
+                  <mat-radio-button value="6">{{gameData.p6.name}}</mat-radio-button>
+                </div>
+              </div>
+              <div *ngIf="userid%2==0">
+                <div *ngIf="gameData.p1.cards.length!=0">
+                  <mat-radio-button value="1">{{gameData.p1.name}}</mat-radio-button>
+                </div>
+                <div *ngIf="gameData.p3.cards.length!=0">
+                  <mat-radio-button value="3">{{gameData.p3.name}}</mat-radio-button>
+                </div>
+                <div *ngIf="gameData.p5.cards.length!=0">
+                  <mat-radio-button value="5">{{gameData.p5.name}}</mat-radio-button>
+                </div>
+              </div>
+              <br>
+            </mat-radio-group>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group formControlName="card">
+            <div class="wrapper-cards">
+              <div class="sug-cards" *ngFor="let item of cards1">
+                <mat-radio-button value="{{item}}">{{item}}</mat-radio-button>
+              </div>
+            </div>
+            <div class="wrapper-cards">
+              <div class="sug-cards" *ngFor="let item of cards2">
+                <mat-radio-button value="{{item}}">{{item}}</mat-radio-button>
+              </div>
+            </div>
+            <div class="wrapper-cards">
+              <div class="sug-cards" *ngFor="let item of cards3">
+                <mat-radio-button value="{{item}}">{{item}}</mat-radio-button>
+              </div>
+            </div>
+            <div class="wrapper-cards">
+              <div class="sug-cards" *ngFor="let item of cards4">
+                <mat-radio-button value="{{item}}">{{item}}</mat-radio-button>
+              </div>
+            </div>
+          </mat-radio-group>
+
+          <br><br>
+
+          <button class="ask-button" mat-raised-button type="submit" (click)="onSubmit()" [disabled]="!form.valid || playerTurn==false">ASK</button>
+        </mat-card-content>
+      </form>
+    </mat-card>
+
+  </div>
+  <!-- -->
+  <div class="score-board">
+    <mat-card class="scorecard-matcard">
+      <table>
+        <tr>
+          <td class="td-table">ODD</td>
+          <td class="td-table">EVEN</td>
+        </tr>
+        <tr>
+          <td class="tr-table">{{odd}}</td>
+          <td class="tr-table">{{even}}</td>
+        </tr>
+      </table>
+    </mat-card>
+  </div>
+
+</div>

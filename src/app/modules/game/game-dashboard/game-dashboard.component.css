@@ -1,0 +1,75 @@
+.cards{
+    float: left;
+}
+mat-grid-tile{
+    background-color: #D8D8D8;
+}
+
+.card-holder-matcard{
+    background-color: #D9FDD9;
+    height: 65px;
+}
+.wrapper-cards{
+    float: left;
+    padding-left: 20px;
+}
+.ask-friend-deck-matcard{
+    background-color: #A8ACFD;
+    height: 400px;
+    width: 360px;
+
+    padding-left: 20px;
+    float: left;
+}
+.Suggestion-deck-matcard{
+    background-color: #FFCACA;
+    height: 400px;
+    width: 360px;
+
+    padding-left: 5px;
+    float: left;
+    margin-left: 1%;
+}
+
+mat-radio-button{
+    padding-left: 10px;
+}
+
+.ask-button{
+    margin-left: 20px;
+    width: 300px;
+}
+
+.deal-maker-matcard{
+    background-color: #FFF1B2;
+    height: 65px;
+}
+
+.score-board{
+    float: left;
+
+}
+.scorecard-matcard{
+    height: 400px;
+    width: 720px;
+    background-color: #FFED99;
+    margin-left: 1%;
+}
+
+.td-table{
+    font-size: 30px;
+    padding-top: 20px;
+    padding-left: 130px;
+    padding-right: 130px;
+}
+
+.tr-table{
+    font-size: 120px;
+    padding-top: 60px;
+    padding-left: 140px;
+    padding-right: 130px;
+}
+
+#close{
+    float: left;
+}

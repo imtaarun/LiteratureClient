@@ -1,0 +1,24 @@
+<mat-card>
+  <div class="form-wrap">
+    <form [formGroup]="playForm" (ngSubmit)="save()">
+      <table>
+        <tr>
+          <td>
+            <p>UserName :</p>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width" appearance="outline">
+              <mat-label>Enter your Name"</mat-label>
+              <input formControlName="Name" matInput placeholder="Name">
+            </mat-form-field>
+            &nbsp;&nbsp;
+            <button mat-raised-button color="accent" [disabled]="!playForm.valid ">Play</button>
+            <mat-error>
+              <span *ngIf="!playForm.get('Name').valid && playForm.get('Name').touched">Please fill in the field!!</span>
+            </mat-error>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</mat-card>
