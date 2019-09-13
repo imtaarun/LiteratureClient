@@ -10,7 +10,7 @@ import { Deal } from "src/app/shared/dto/deal-dto";
 })
 export class HomeServiceService {
   local = 'http://localhost:3000';
-  server = 'http://3.90.33.1:8080/';
+  server = 'http://3.220.59.75:8080/';
   baseUrl = this.server;
   constructor(
     private http: HttpClient
