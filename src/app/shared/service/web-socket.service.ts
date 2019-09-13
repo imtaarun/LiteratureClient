@@ -14,10 +14,7 @@ export class WebSocketService {
   constructor() { }
 
   connect(): Subject<MessageEvent> {
-  local = 'http://localhost:3000';
-  server = 'http://ec2-54-85-24-186.compute-1.amazonaws.com:8080/';
-  
-    this.socket = io(this.server);
+    this.socket = io('http://3.90.33.1:8080');
 
     // tslint:disable-next-line:prefer-const
     let observable = new Observable(observer => {
