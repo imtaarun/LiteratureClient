@@ -14,7 +14,7 @@ export class WebSocketService {
   constructor() { }
 
   connect(): Subject<MessageEvent> {
-    this.socket = io('http://3.90.33.1:8080');
+    this.socket = io('http://3.220.59.75:8080');
 
     // tslint:disable-next-line:prefer-const
     let observable = new Observable(observer => {
