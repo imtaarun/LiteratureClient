@@ -13,7 +13,7 @@ export class GameRoomComponent implements OnInit {
   userid: string;
   playerId: string;
   firtTime = true;
-  socket = io('http://54.196.240.217:8080');
+  socket = io('http://54.173.194.223:8080');
 
   constructor(
     private activeRoute: ActivatedRoute,

@@ -45,7 +45,7 @@ export class GameDashboardComponent implements OnInit {
   cards4 = [
     'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C9', 'C10', 'CK', 'CQ', 'CJ', 'CA'
   ];
-  socket = io('http://54.196.240.217:8080');
+  socket = io('http://54.173.194.223:8080');
   form = new FormGroup({
     card: new FormControl('', Validators.required),
     opponent: new FormControl('', Validators.required)
