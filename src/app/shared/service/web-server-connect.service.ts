@@ -12,8 +12,8 @@ export class WebServerConnectService {
     private wsService: WebSocketService
   ) {
     // tslint:disable-next-line:no-angle-bracket-type-assertion
-    this.playerId = <Subject<any>> wsService
-    .connect();
+    // this.playerId = <Subject<any>> wsService
+    // .connect();
   }
 
   joinRoom(room) {
