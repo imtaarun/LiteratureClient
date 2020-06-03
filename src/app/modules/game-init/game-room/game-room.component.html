@@ -1,9 +1,17 @@
 <p>
-  Welcome {{userid}}
+    Welcome {{userid}}
 </p>
 
 <button mat-button (click)="join()">Join Room</button>
+<button mat-button (click)="create()">Create Room</button>
 
 <p>
-  Player Id ----> {{playerId}}
+    Player Id ----> {{playerId}}
 </p>
+
+<div class='joined-players'>
+    <h1>Joined Players</h1>
+    <div *ngFor="let item of joined">
+        <p>{{item}}</p>
+    </div>
+</div>

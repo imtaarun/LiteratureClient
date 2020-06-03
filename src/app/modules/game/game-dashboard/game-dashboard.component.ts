@@ -45,8 +45,8 @@ export class GameDashboardComponent implements OnInit {
   cards4 = [
     'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C9', 'C10', 'CK', 'CQ', 'CJ', 'CA'
   ];
-  socket = io('http://3.16.56.71:8080');
-  // socket = io('http://localhost:3000');
+  // socket = io('http://3.16.56.71:8080');
+  socket = io('http://localhost:8080');
 
   form = new FormGroup({
     card: new FormControl('', Validators.required),
@@ -92,8 +92,6 @@ export class GameDashboardComponent implements OnInit {
     this.playerCards = this.playerData.cards;
     this.playerName = this.playerData.name;
     this.playerTurn = this.playerData.turn;
-    console.log(data);
-
   }
 
   fetchTurnInfo(data) {

@@ -13,8 +13,9 @@ export class GameRoomComponent implements OnInit {
   userid: string;
   playerId: string;
   firtTime = true;
-  socket = io('http://3.16.56.71:8080');
-  // socket = io('http://localhost:3000');
+  joined: [];
+  // socket = io('http://3.16.56.71:8080');
+  socket = io('http://localhost:8080');
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -29,14 +30,19 @@ export class GameRoomComponent implements OnInit {
   ngOnInit() {
   }
 
+  create() {
+
+  }
+
   join() {
     this.socket.emit('room', this.userid);
     this.socket.on('room', (data) => {
-      console.log('recieved a message --> ' + data.number);
+      console.log(data);
       if (this.firtTime) {
         this.playerId = data.number;
         this.firtTime = false;
       }
+      this.joined = data.joinedPlayers;
     });
     this.socket.on('start', (data) => {
       // shuffle  -----  to be done
